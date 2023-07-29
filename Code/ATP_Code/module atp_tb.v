@@ -1,6 +1,5 @@
 module atp_tb;
-
-  // Inputs
+
   reg clk;
   reg reset;
   reg start_payment;
@@ -16,13 +15,11 @@ module atp_tb;
   reg [7:0] card_amount;
   reg currency_inserted;
   reg [7:0] currency_amount;
-
-  // Outputs
+
   wire [7:0] remaining_amount;
   wire payment_complete;
   wire line_disconnected;
-
-  // Instantiate the atp module
+
   atp dut (
     .clk(clk),
     .reset(reset),
@@ -43,11 +40,9 @@ module atp_tb;
     .payment_complete(payment_complete),
     .line_disconnected(line_disconnected)
   );
-
-  // Clock generation
+
   always #5 clk = ~clk;
-
-  // Initial values
+
   initial begin
     clk = 0;
     reset = 1;
@@ -64,17 +59,14 @@ module atp_tb;
     card_amount = 0;
     currency_inserted = 0;
     currency_amount = 0;
-
-    // Wait for reset to deassert
+
     #10 reset = 0;
-
-    // Test case 1
+
     #5 start_payment = 1;
-    #5 barcode = 2; // Example barcode value
+    #5 barcode = 2; 
     #10 start_payment = 0;
     #100;
-
-    // Test case 2
+
     #5 start_payment = 1;
     #5 barcode = 3; // Example barcode value
     #10 start_payment = 0;
@@ -86,11 +78,11 @@ module atp_tb;
 
     // Test case 3
     #5 start_payment = 1;
-    #5 barcode = 4; // Example barcode value
+    #5 barcode = 4; 
     #10 start_payment = 0;
     #5 choice = 3;
     #5 card_inserted = 1;
-    #5 card_number = 1234; // Example card number
+    #5 card_number = 1234; 
     #5 card_choice = 0; // Debit card
     #5 card_amount = 100; // Example card amount
     #10 card_inserted = 0;
@@ -98,15 +90,14 @@ module atp_tb;
 
     // Test case 4
     #5 start_payment = 1;
-    #5 barcode = 5; // Example barcode value
+    #5 barcode = 5; 
     #10 start_payment = 0;
     #5 choice = 4;
     #5 currency_inserted = 1;
-    #5 currency_amount = 20; // Example currency amount
+    #5 currency_amount = 20;
     #10 currency_inserted = 0;
     #100;
-
-    // Test case 5
+
     #5 start_payment = 1;
     #5 barcode = 6; // Example barcode value
     #10 start_payment = 0;
@@ -114,8 +105,7 @@ module atp_tb;
     #10 start_payment = 1; // Restart the payment process
     #10 start_payment = 0;
     #100;
-
-    // Finish simulation
+
     #10 $finish;
   end
 endmodule
