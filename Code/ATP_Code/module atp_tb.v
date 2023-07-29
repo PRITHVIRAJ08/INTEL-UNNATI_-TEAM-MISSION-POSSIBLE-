@@ -102,7 +102,7 @@ module atp_tb;
     #5 barcode = 6; // Example barcode value
     #10 start_payment = 0;
     #5 choice = 0;
-    #10 start_payment = 1; // Restart the payment process
+    #10 start_payment = 1; 
     #10 start_payment = 0;
     #100;
 
