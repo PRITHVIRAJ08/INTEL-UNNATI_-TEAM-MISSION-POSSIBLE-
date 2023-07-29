@@ -18,8 +18,7 @@ module fsm(
   output reg payment_complete,
   output reg line_disconnected
 );
-
-  // Internal signals
+
   reg [3:0] state;
   reg [7:0] payment_amount;
   reg [7:0] total_amount;
@@ -27,8 +26,7 @@ module fsm(
   reg dd_inserted_prev;
   reg card_inserted_prev;
   reg currency_inserted_prev;
-
-  // Constants for note denominations
+
   localparam DENOM_1000 = 4'b1000;
   localparam DENOM_500 = 4'b0100;
   localparam DENOM_100 = 4'b0010;
@@ -36,8 +34,7 @@ module fsm(
   localparam DENOM_20 = 4'b1010;
   localparam DENOM_10 = 4'b0110;
   localparam DENOM_5 = 4'b0000;
-
-  // State definitions
+
   localparam IDLE = 4'b0000;
   localparam PLACE_BARCODE = 4'b0001;
   localparam MOVE_BILL = 4'b0010;
@@ -53,8 +50,7 @@ module fsm(
   localparam VERIFY_CARD = 4'b1100;
   localparam INSERT_CURRENCY = 4'b1101;
   localparam CHECK_AMOUNT = 4'b1110;
-
-  // Next state and output logic
+
   always @(posedge clk or posedge reset) begin
     if (reset) begin
       state <= IDLE;
